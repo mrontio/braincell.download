@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Brain Cells</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 100px auto;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .options {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Download Brain Cells</h1>
+        <button class="btn" id="downloadNow">Download Now</button>
+        <div class="options" id="options" style="display: none;">
+            <button class="btn" onclick="downloadFile('5Billion.txt', 'Oops! You lost 5 billion brain cells!')">5 Billion Cells</button>
+            <button class="btn" onclick="downloadFile('10Billion.txt', 'Oops! You lost 10 billion brain cells!')">10 Billion Cells</button>
+            <button class="btn" onclick="downloadFile('Pyramidal.txt', 'Oops! Your pyramidal cells are gone!')">Pyramidal Cells</button>
+            <button class="btn" onclick="downloadFile('Stellate.txt', 'Oops! Stellate cells disappeared!')">Stellate Cells</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('downloadNow').addEventListener('click', function() {
+            document.getElementById('options').style.display = 'block';
+        });
+
+        function downloadFile(filename, content) {
+            const element = document.createElement('a');
+            const file = new Blob([content], { type: 'text/plain' });
+            element.href = URL.createObjectURL(file);
+            element.download = filename;
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+    </script>
+</body>
+</html>
