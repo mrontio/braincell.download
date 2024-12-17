@@ -4,59 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download Brain Cells</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
         }
-        .container {
-            margin: 100px auto;
-            max-width: 600px;
-            background: white;
+        .full-screen {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(180deg, #020024, #090979, #00d4ff);
+            color: white;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1 {
+        .full-screen h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff;
+        }
+        .full-screen p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+        .btn {
+            background-color: #00d4ff;
+            color: black;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #007acc;
+            color: white;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+        }
+        .matrix-container {
+            margin: 50px auto;
+            max-width: 1200px;
+            text-align: center;
+        }
+        .matrix-title {
             font-size: 2rem;
             margin-bottom: 20px;
         }
-        .btn {
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .grid button {
             background-color: #007bff;
             color: white;
-            padding: 10px 20px;
+            padding: 15px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 1rem;
-            margin: 10px;
+            transition: background 0.3s ease;
         }
-        .btn:hover {
+        .grid button:hover {
             background-color: #0056b3;
-        }
-        .options {
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Download Brain Cells</h1>
-        <button class="btn" id="downloadNow">Download Now</button>
-        <div class="options" id="options" style="display: none;">
-            <button class="btn" onclick="downloadFile('5Billion.txt', 'Oops! You lost 5 billion brain cells!')">5 Billion Cells</button>
-            <button class="btn" onclick="downloadFile('10Billion.txt', 'Oops! You lost 10 billion brain cells!')">10 Billion Cells</button>
-            <button class="btn" onclick="downloadFile('Pyramidal.txt', 'Oops! Your pyramidal cells are gone!')">Pyramidal Cells</button>
-            <button class="btn" onclick="downloadFile('Stellate.txt', 'Oops! Stellate cells disappeared!')">Stellate Cells</button>
+    <div class="full-screen">
+        <h1>Download New Brain Cells Now!</h1>
+        <p id="description">[Your description here]</p>
+        <button class="btn" onclick="scrollToMatrix()">Start Download</button>
+    </div>
+
+    <div class="matrix-container" id="matrix">
+        <div class="matrix-title">Choose the Type and Quantity of Brain Cells</div>
+        <div class="grid">
+            <button onclick="downloadFile('5Billion.txt', 'Oops! You lost 5 billion brain cells!')">5 Billion Cells</button>
+            <button onclick="downloadFile('10Billion.txt', 'Oops! You lost 10 billion brain cells!')">10 Billion Cells</button>
+            <button onclick="downloadFile('Pyramidal.txt', 'Oops! Your pyramidal cells are gone!')">Pyramidal Cells</button>
+            <button onclick="downloadFile('Stellate.txt', 'Oops! Stellate cells disappeared!')">Stellate Cells</button>
+            <button onclick="downloadFile('NeuronBundle.txt', 'Your neurons vanished like magic!')">Neuron Bundle</button>
+            <button onclick="downloadFile('GlialCells.txt', 'Glial cells have left the building!')">Glial Cells</button>
         </div>
     </div>
 
     <script>
-        document.getElementById('downloadNow').addEventListener('click', function() {
-            document.getElementById('options').style.display = 'block';
-        });
+        function scrollToMatrix() {
+            document.getElementById('matrix').scrollIntoView({ behavior: 'smooth' });
+        }
 
         function downloadFile(filename, content) {
             const element = document.createElement('a');
